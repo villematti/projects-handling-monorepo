@@ -14,8 +14,13 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
+    "baseUrl": "./",
+    "paths": {
+      "@angular-projects/material": ["libs/material/src/index.ts"],
+      "@angular-projects/core-data": ["libs/core-data/src/index.ts"],
+      "@angular-projects/ui-login": ["libs/ui-login/src/index.ts"],
+      "@angular-projects/ui-toolbar": ["libs/ui-toolbar/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
