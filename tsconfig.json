@@ -19,7 +19,8 @@
       "@angular-projects/material": ["libs/material/src/index.ts"],
       "@angular-projects/core-data": ["libs/core-data/src/index.ts"],
       "@angular-projects/ui-login": ["libs/ui-login/src/index.ts"],
-      "@angular-projects/ui-toolbar": ["libs/ui-toolbar/src/index.ts"]
+      "@angular-projects/ui-toolbar": ["libs/ui-toolbar/src/index.ts"],
+      "@angular-projects/schemas": ["libs/schemas/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

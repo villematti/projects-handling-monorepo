@@ -88,10 +88,7 @@
               "apps/dashboard/tsconfig.app.json",
               "apps/dashboard/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/dashboard/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/dashboard/**"]
           }
         },
         "test": {
@@ -125,13 +122,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/dashboard-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/dashboard-e2e/**"
-            ]
+            "tsConfig": ["apps/dashboard-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/dashboard-e2e/**"]
           }
         }
       }
@@ -149,10 +141,7 @@
               "libs/material/tsconfig.lib.json",
               "libs/material/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/material/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/material/**"]
           }
         },
         "test": {
@@ -183,10 +172,7 @@
               "libs/core-data/tsconfig.lib.json",
               "libs/core-data/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core-data/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core-data/**"]
           }
         },
         "test": {
@@ -217,10 +203,7 @@
               "libs/ui-login/tsconfig.lib.json",
               "libs/ui-login/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui-login/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui-login/**"]
           }
         },
         "test": {
@@ -251,10 +234,7 @@
               "libs/ui-toolbar/tsconfig.lib.json",
               "libs/ui-toolbar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/ui-toolbar/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/ui-toolbar/**"]
           }
         },
         "test": {
@@ -285,9 +265,7 @@
             "outputPath": "dist/apps/api/api",
             "main": "apps/api/api/src/main.ts",
             "tsConfig": "apps/api/api/tsconfig.app.json",
-            "assets": [
-              "apps/api/api/src/assets"
-            ]
+            "assets": ["apps/api/api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -316,10 +294,7 @@
               "apps/api/api/tsconfig.app.json",
               "apps/api/api/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/api/api/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/api/api/**"]
           }
         },
         "test": {
@@ -328,6 +303,37 @@
             "jestConfig": "apps/api/api/jest.config.js",
             "tsConfig": "apps/api/api/tsconfig.spec.json"
           }
+        }
+      }
+    },
+    "schemas": {
+      "projectType": "library",
+      "root": "libs/schemas",
+      "sourceRoot": "libs/schemas/src",
+      "prefix": "angular-projects",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/schemas/tsconfig.lib.json",
+              "libs/schemas/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/schemas/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/schemas/jest.config.js",
+            "tsConfig": "libs/schemas/tsconfig.spec.json",
+            "setupFile": "libs/schemas/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }

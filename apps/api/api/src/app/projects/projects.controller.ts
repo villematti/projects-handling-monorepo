@@ -1,58 +1,34 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { Project } from '@angular-projects/core-data';
+import { ProjectsService } from './projects.service';
+import { Observable, of } from 'rxjs';
 
 @Controller('projects')
 export class ProjectsController {
+  constructor(private readonly projectsService: ProjectsService) {}
+
   @Get()
-  getData(): Project[] {
-    return [
-      {
-        id: '1',
-        title: 'Project One',
-        details: 'This is a sample project',
-        percentComplete: 20,
-        approved: false,
-      },
-      {
-        id: '2',
-        title: 'Project Two',
-        details: 'This is a sample project',
-        percentComplete: 40,
-        approved: false,
-      },
-      {
-        id: '3',
-        title: 'Project Three',
-        details: 'This is a sample project',
-        percentComplete: 100,
-        approved: true,
-      }
-    ];
+  getData(): Observable<Project[]> {
+    return this.projectsService.findAll();
   }
 
   @Get(':id')
-  getProject(@Param('id') id): Project {
-    return {
-      id: '1',
-      title: 'Project One',
-      details: 'This is a sample project',
-      percentComplete: 20,
-      approved: false,
-    }
+  getProject(@Param('id') id: string): Observable<Project> {
+    return this.projectsService.findOne(id);
   }
 
   @Post()
-  createProject(@Body() project: Project): string {
-    return `${project.title} ${project.details} has been created!`;
+  createProject(@Body() project: Project): Observable<Project> {
+    return this.projectsService.create(project);
   }
 
   @Put(':id')
   updateProject(@Body() project: Project, @Param('id') id) {
-    return `Project ID ${id} has been updated`;
+    return this.projectsService.update(id, project);
   }
 
   @Delete(':id')
-  deleteProject(@Param('id') id) {
-    return `Project id ${id} was deleted.`;
+  deleteProject(@Param('id') id): Observable<Project> {
+    return this.projectsService.delete(id);
   }
 }
