@@ -12,9 +12,6 @@ import { MaterialModule } from '@angular-projects/material';
     CommonModule,
     ProjectsRoutingModule,
     MaterialModule
-  ],
-  exports: [
-    ProjectsComponent
   ]
 })
 export class ProjectsModule { }

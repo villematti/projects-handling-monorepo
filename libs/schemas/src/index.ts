@@ -1,1 +1,1 @@
-export * from './lib/schemas.module';
+export { ProjectSchema } from './lib/project.schema';
