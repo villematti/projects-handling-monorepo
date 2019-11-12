@@ -1,24 +1,24 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
-import { Project } from '@angular-projects/core-data';
+import { Project, ProjectDTO } from '@angular-projects/core-data';
 import { ProjectsService } from './projects.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  getData(): Observable<Project[]> {
+  getData(): Observable<ProjectDTO[]> {
     return this.projectsService.findAll();
   }
 
   @Get(':id')
-  getProject(@Param('id') id: string): Observable<Project> {
+  getProject(@Param('id') id: string): Observable<ProjectDTO> {
     return this.projectsService.findOne(id);
   }
 
   @Post()
-  createProject(@Body() project: Project): Observable<Project> {
+  createProject(@Body() project: ProjectDTO): Observable<ProjectDTO> {
     return this.projectsService.create(project);
   }
 
@@ -28,7 +28,7 @@ export class ProjectsController {
   }
 
   @Delete(':id')
-  deleteProject(@Param('id') id): Observable<Project> {
+  deleteProject(@Param('id') id): Observable<ProjectDTO> {
     return this.projectsService.delete(id);
   }
 }

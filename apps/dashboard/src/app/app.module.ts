@@ -11,6 +11,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { AppRoutingModule } from './app-routing.module';
 import { UiLoginModule } from '@angular-projects/ui-login';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],

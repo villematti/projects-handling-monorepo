@@ -1,31 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Project } from '@angular-projects/core-data';
+import { ProjectDTO, Project } from '@angular-projects/core-data';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProjectsService {
-  constructor(@InjectModel('Project') private readonly projectModel:Model<Project>) {}
+  constructor(@InjectModel('Project') private readonly projectModel:Model<ProjectDTO>) {}
 
-  findAll(): Observable<Project[]> {
+  findAll(): Observable<ProjectDTO[]> {
     return this.projectModel.find();
   }
 
-  findOne(id: string): Observable<Project> {
+  findOne(id: string): Observable<ProjectDTO> {
     return this.projectModel.findOne({ _id: id });
   }
 
-  create(project: Project): Observable<Project> {
+  create(project: ProjectDTO): Observable<ProjectDTO> {
     const newProject = new this.projectModel(project);
     return newProject.save();
   }
 
-  delete(id: string): Observable<Project> {
-    return this.projectModel.findByIdAndRemove(id);
+  delete(id: string): Observable<ProjectDTO> {
+    return this.projectModel.findByIdAndRemove<ProjectDTO>(id);
   }
 
-  update(id: string, project: Project): Observable<Project> {
-    return this.projectModel.findByIdAndUpdate(id, project, { new: true })
+  update(id: string, project: Project): Observable<ProjectDTO> {
+    return this.projectModel.findByIdAndUpdate<ProjectDTO>(id, project, { new: true })
   }
 }

@@ -1,37 +1,59 @@
 import { Injectable } from '@angular/core';
-import { Project } from './project';
+import { Project, ProjectDTO } from './project';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, flatMap, switchMap } from 'rxjs/operators';
+
+const BASE_URL = 'http://localhost:3333/'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectsService {
-  private projects: Project[] = [
-    {
-      id: '1',
-      title: 'Project One',
-      details: 'This is a sample project',
-      percentComplete: 20,
-      approved: false,
-    },
-    {
-      id: '2',
-      title: 'Project Two',
-      details: 'This is a sample project',
-      percentComplete: 40,
-      approved: false,
-    },
-    {
-      id: '3',
-      title: 'Project Three',
-      details: 'This is a sample project',
-      percentComplete: 100,
-      approved: true,
-    }
-  ];
+  constructor(private httpClient: HttpClient) {}
 
-  all(): Project[] {
-    return this.projects;
+  model = 'projects';
+
+  getUrl(): string {
+    return `${BASE_URL}${this.model}`;
   }
 
-  constructor() { }
+  getUrlForId(id: string): string {
+    return this.getUrl() + `/${id}`
+  }
+
+  all$(): Observable<Project[]> {
+    return this.httpClient.get<ProjectDTO[]>(this.getUrl())
+      .pipe(map(params => params.map(p => this.transformId(p))));
+  }
+
+  one$(id: string): Observable<Project> {
+    return this.httpClient.get<ProjectDTO>(this.getUrlForId(id))
+      .pipe(map(p => this.transformId(p)));
+  }
+
+  create$(project: Project): Observable<Project> {
+    return this.httpClient.post<ProjectDTO>(this.getUrl(), project)
+      .pipe(map(p => this.transformId(p)));
+  }
+
+  update$(project: Project): Observable<Project> {
+    return this.httpClient.put<ProjectDTO>(this.getUrlForId(project.id), project)
+      .pipe(map(p => this.transformId(p)));
+  }
+
+  delete$(id: string): Observable<Project> {
+    return this.httpClient.delete<ProjectDTO>(this.getUrlForId(id))
+      .pipe(map(p => this.transformId(p)));
+  }
+
+  private transformId(p: ProjectDTO): Project {
+    return {
+      id: p._id,
+      title: p.title,
+      details: p.details,
+      percentComplete: p.percentComplete,
+      approved: p.approved
+    };
+  }
 }

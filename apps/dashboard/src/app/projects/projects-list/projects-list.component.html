@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Projects</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item (click)="select(project)" *ngFor="let project of projects">
+        <h3 mat-line [style.color]="primaryColor">
+          {{ project.title }}
+        </h3>
+        <p mat-line>
+          {{ project.details }}
+        </p>
+        <button mat-icon-button (click)="delete($event, project)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
