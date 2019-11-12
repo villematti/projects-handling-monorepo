@@ -17,13 +17,4 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  delete(e: MouseEvent, project: Project): void {
-    e.stopPropagation();
-    this.deleteProject.emit(project);
-  }
-
-  select(project): void {
-    this.selectProject.emit(project);
-  }
 }

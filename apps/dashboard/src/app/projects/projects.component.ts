@@ -48,29 +48,30 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  saveProject() {
-    if (!this.selectedProject.id) {
-      this.createProject();
+  saveProject(project) {
+    if (!project.id) {
+      this.createProject(project);
     } else {
-      this.updateProject();
+      this.updateProject(project);
     }
   }
 
-  createProject() {
-    this.projectService.create$(this.selectedProject).subscribe(res => {
+  createProject(project: Project) {
+    this.projectService.create$(project).subscribe(res => {
       this.getAllProjects();
       this.resetProject();
     });
   }
 
-  updateProject() {
-    this.projectService.update$(this.selectedProject).subscribe(res => {
+  updateProject(project: Project) {
+    this.projectService.update$(project).subscribe(res => {
       this.getAllProjects();
+      this.selectedProject = project;
     })
   }
 
-  deleteProject(e: MouseEvent, project: Project): void {
-    e.stopPropagation();
+  deleteProject(project: Project): void {
+
     const approve = confirm("Are you sure you want to delete this project?");
 
     if (!approve) {

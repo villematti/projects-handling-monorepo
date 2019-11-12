@@ -10,9 +10,9 @@
     <!-- PROJECT DETAILS -->
   <div class="col-50">
     <app-projects-details
-      [selectedProject]="selectedProject"
-      (cancelChange)="cancel()"
-      (saveProject)="saveProject()"
+      [project]="selectedProject"
+      (cancel)="cancel()"
+      (save)="saveProject($event)"
     ></app-projects-details>
   </div>
 </div>
